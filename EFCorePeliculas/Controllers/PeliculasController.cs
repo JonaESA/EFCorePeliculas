@@ -148,5 +148,25 @@ namespace EFCorePeliculas.Controllers
             return _mapper.Map<List<PeliculaDTO>>(peliculas);
         }
 
+        [HttpPost] // Ba3
+        public async Task<ActionResult> Post(PeliculaCreacionDTO peliculaCreacionDTO)
+        {
+            var pelicula = _mapper.Map<Pelicula>(peliculaCreacionDTO);
+            pelicula.Generos.ForEach(g => _context.Entry(g).State = EntityState.Unchanged);
+            pelicula.SalasDeCines.ForEach(s => _context.Entry(s).State = EntityState.Unchanged);
+
+            if (pelicula.PeliculasActores is not null)
+            {
+                for (int i = 0; i < pelicula.PeliculasActores.Count; i++)
+                {
+                    pelicula.PeliculasActores[i].Orden = i + 1;
+                }
+            }
+
+            _context.Add(pelicula);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }

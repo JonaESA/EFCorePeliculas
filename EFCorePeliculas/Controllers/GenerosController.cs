@@ -11,7 +11,7 @@ namespace EFCorePeliculas.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public GenerosController(ApplicationDbContext context) // Ba3
+        public GenerosController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -35,32 +35,13 @@ namespace EFCorePeliculas.Controllers
             return genero;
         }
 
-        [HttpGet("primer")]
-        public async Task<ActionResult<Genero>> Primer()
+        [HttpPost]
+        public async Task<ActionResult> Post(Genero genero)
         {
-            var genero = await _context.Generos.FirstOrDefaultAsync(g => g.Nombre.StartsWith("X"));
-            if (genero is null)
-            {
-                return NotFound();
-            }
-            return genero;
+            _context.Add(genero); // Marca Genero as Add
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
-        [HttpGet("filtrar")]
-        public async Task<IEnumerable<Genero>> Filtrar(string nombre)
-        {
-            return await _context.Generos.Where(g => g.Nombre.Contains(nombre)).ToListAsync();
-        }
-
-        [HttpGet("paginacion")]
-        public async Task<ActionResult<IEnumerable<Genero>>> GetPaginacion(int pagina = 1)
-        {
-            int cantidadRegistrosPorPagina = 2;
-            var generos = await _context.Generos
-                .Skip((pagina - 1) * cantidadRegistrosPorPagina) // Bonita logica de paginación
-                .Take(cantidadRegistrosPorPagina)
-                .ToListAsync();
-            return generos;
-        }
     }
 }
