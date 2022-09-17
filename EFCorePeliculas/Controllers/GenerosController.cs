@@ -43,5 +43,18 @@ namespace EFCorePeliculas.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var genero = await _context.Generos.FirstOrDefaultAsync(g => g.Identificador == id);
+            if (genero is null)
+            {
+                return NotFound();
+            }
+            _context.Remove(genero);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }
