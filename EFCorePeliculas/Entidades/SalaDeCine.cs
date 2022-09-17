@@ -8,5 +8,6 @@
         public int CineId { get; set; }
         public Cine Cine { get; set; }
         public HashSet<Pelicula> Peliculas { get; set; }
+        public Moneda Moneda { get; set; }
     }
 }

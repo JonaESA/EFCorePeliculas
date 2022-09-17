@@ -22,7 +22,7 @@ namespace EFCorePeliculas.Servicios
 
             CreateMap<PeliculaCreacionDTO, Pelicula>() // Ba3
                 .ForMember(ent => ent.Generos, dto => dto.MapFrom(campo => campo.Generos.Select(id => new Genero() { Identificador = id })))
-                .ForMember(ent => ent.SalasDeCines, dto => dto.MapFrom(campo => campo.SalasDeCine.Select(id => new SalaDeCine() { Id = id} )));
+                .ForMember(ent => ent.SalasDeCines, dto => dto.MapFrom(campo => campo.SalasDeCine.Select(id => new SalaDeCine() { Id = id})));
 
             CreateMap<PeliculaActorCreacionDTO, PeliculaActor>();
 
