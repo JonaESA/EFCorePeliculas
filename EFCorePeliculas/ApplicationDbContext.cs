@@ -8,7 +8,7 @@ namespace EFCorePeliculas
     public class ApplicationDbContext : DbContext
     {
         // Bob construye
-        public ApplicationDbContext(DbContextOptions options) : base(options) // Ba3
+        public ApplicationDbContext(DbContextOptions options) : base(options) // Ba3 
         {            
         }
 

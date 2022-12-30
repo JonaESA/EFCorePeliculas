@@ -7,6 +7,8 @@ namespace EFCorePeliculas.Entidades
         public int Id { get; set; }
         public string Nombre { get; set; }
         public Point Ubicacion { get; set; }
+
+        // Propiedades de navegacion | the others tablas con que se relaciona Cine
         public CineOferta CineOferta { get; set; }
         public HashSet<SalaDeCine> SalasDeCine { get; set; }
     }

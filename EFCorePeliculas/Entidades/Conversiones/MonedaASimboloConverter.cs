@@ -6,7 +6,6 @@ namespace EFCorePeliculas.Entidades.Conversiones
     {
         public MonedaASimboloConverter() : base(valor => MapeoMonedaString(valor), valor => MapeoStringMoneda(valor))
         {
-
         }
 
         private static string MapeoMonedaString(Moneda valor)
